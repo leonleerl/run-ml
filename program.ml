@@ -1,3 +1,4 @@
-# an assignment statement, 2.500000 is printed
-x <- 2.5
-print x
+# 24 is printed
+x <- 8
+y <- 3
+print x * y

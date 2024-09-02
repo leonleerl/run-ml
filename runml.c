@@ -52,10 +52,18 @@ int main()
             trim(x);
             trim(value);
 
-            // 输出结果
-            // printf("变量名: '%s', 值: '%s'\n", x, value);
-            fprintf(cFile, "\tdouble %s;\n", x);
-            fprintf(cFile, "\t%s = %s;\n", x, value);
+            // 是浮点数
+            if (strchr(value, '.') || strchr(value, 'e') || strchr(value, 'E'))
+            {
+                fprintf(cFile, "\tdouble %s = 0.0;\n", x);
+                fprintf(cFile, "\t%s = %s;\n", x, value);
+            }
+            // 是整数
+            else
+            {
+                fprintf(cFile, "\tint %s = 0;\n", x);
+                fprintf(cFile, "\t%s = %s;\n", x, value);
+            }
         }
 
         // print
@@ -69,7 +77,14 @@ int main()
 
             // 第二次调用获取表达式部分
             expression = strtok(NULL, ""); // 获取剩余部分
-            fprintf(cFile, "\tprintf(\"%%.6f\\n\", %s);", expression);
+                                           // fprintf(cFile, "\tprintf(\"%%.6f\\n\", %s);", expression);
+            fprintf(cFile,
+                    "\tif ((%s) == (int)(%s)) {\n"
+                    "\t\tprintf(\"%%d\\n\", (int)%s);\n"
+                    "\t} else {\n"
+                    "\t\tprintf(\"%%.6f\\n\", (double)%s);\n"
+                    "\t}\n",
+                    expression, expression, expression, expression);
         }
     }
 

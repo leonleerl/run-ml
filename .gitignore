@@ -1,4 +1,5 @@
 .vscode
-/draft
+draft
 main.dSYM
 runml.dSYM
+run.dSYM
