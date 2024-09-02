@@ -36,6 +36,9 @@ int main()
     // 逐行读取ml文件并解析
     while (fgets(line, sizeof(line), mlFile))
     {
+        // 如果第一行为注释符号#，则忽略该行
+        if (line[0] == '#')
+            continue;
         // 这句是否为普通的赋值 有"->"
         char *res = strstr(line, operator);
         if (res != NULL)
