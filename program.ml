@@ -1,3 +1,3 @@
-# x <- 2.5
-y <- 3.2
-abcd <- 12312313.00123
+# an assignment statement, 2.500000 is printed
+x <- 2.5
+print x

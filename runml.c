@@ -57,6 +57,20 @@ int main()
             fprintf(cFile, "\tdouble %s;\n", x);
             fprintf(cFile, "\t%s = %s;\n", x, value);
         }
+
+        // print
+        else if (strncmp(line, "print", 5) == 0)
+        {
+            char *command;
+            char *expression;
+
+            // 使用strtok分割字符串，第一次调用获取命令部分
+            command = strtok(line, " ");
+
+            // 第二次调用获取表达式部分
+            expression = strtok(NULL, ""); // 获取剩余部分
+            fprintf(cFile, "\tprintf(\"%%f\\n\", %s);", expression);
+        }
     }
 
     // 写入C文件的结尾
