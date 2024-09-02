@@ -69,7 +69,7 @@ int main()
 
             // 第二次调用获取表达式部分
             expression = strtok(NULL, ""); // 获取剩余部分
-            fprintf(cFile, "\tprintf(\"%%f\\n\", %s);", expression);
+            fprintf(cFile, "\tprintf(\"%%.6f\\n\", %s);", expression);
         }
     }
 
