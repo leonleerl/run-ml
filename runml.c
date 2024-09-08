@@ -66,18 +66,11 @@ int main()
             }
         }
 
-        // print
         else if (strncmp(line, "print", 5) == 0)
         {
-            char *command;
-            char *expression;
+            char *expression = line + 5; // 获取 print 后面的部分
+            trim(expression);            // 去掉表达式前后的空格
 
-            // 使用strtok分割字符串，第一次调用获取命令部分
-            command = strtok(line, " ");
-
-            // 第二次调用获取表达式部分
-            expression = strtok(NULL, ""); // 获取剩余部分
-                                           // fprintf(cFile, "\tprintf(\"%%.6f\\n\", %s);", expression);
             fprintf(cFile,
                     "\tif ((%s) == (int)(%s)) {\n"
                     "\t\tprintf(\"%%d\\n\", (int)%s);\n"
