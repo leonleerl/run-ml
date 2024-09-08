@@ -66,16 +66,30 @@ int main()
             }
         }
 
+        // else if (strncmp(line, "print", 5) == 0)
+        // {
+        //     char *expression = line + 5; // 获取 print 后面的部分
+        //     trim(expression);            // 去掉表达式前后的空格
+
+        //     fprintf(cFile,
+        //             "\tif ((%s) == (int)(%s)) {\n"
+        //             "\t\tprintf(\"%%d\\n\", (int)%s);\n"
+        //             "\t} else {\n"
+        //             "\t\tprintf(\"%%.6f\\n\", (double)%s);\n"
+        //             "\t}\n",
+        //             expression, expression, expression, expression);
+        // }
         else if (strncmp(line, "print", 5) == 0)
         {
             char *expression = line + 5; // 获取 print 后面的部分
             trim(expression);            // 去掉表达式前后的空格
 
+            // 生成对应的C代码
             fprintf(cFile,
                     "\tif ((%s) == (int)(%s)) {\n"
-                    "\t\tprintf(\"%%d\\n\", (int)%s);\n"
+                    "\t\tprintf(\"%%d\\n\", (int)(%s));\n" // 修正括号
                     "\t} else {\n"
-                    "\t\tprintf(\"%%.6f\\n\", (double)%s);\n"
+                    "\t\tprintf(\"%%.6f\\n\", (double)(%s));\n"
                     "\t}\n",
                     expression, expression, expression, expression);
         }
@@ -90,7 +104,8 @@ int main()
     fclose(cFile);
 
     // 编译生成的C代码文件
-    system("gcc run.c -o main");
+    // system("gcc run.c -o main");
+    system("cc -std=c11 -Wall -Werror -o main run.c");
 
     // 运行生成的可执行文件
     system("./main");
